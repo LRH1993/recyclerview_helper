@@ -13,6 +13,6 @@ allprojects {
 2. 在 module 的 build.gradle 文件中添加依赖  
 ```
  dependencies {
-            compile 'com.github.xiaweizi:XWZWebView:1.1.0'
+           compile 'com.github.LRH1993:recyclerview_helper:1.01'
     }
 ```
