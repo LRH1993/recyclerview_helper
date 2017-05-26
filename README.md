@@ -1,6 +1,6 @@
 >RecyclerView作为列表使用，在项目中的应用场景实在是太普遍了。针对项目应用，主要使用了RecyclerView的单或多类型Item，点击/长按事件，ItemAnimator动画效果以及上拉加载、下拉刷新。recyclerview_helper就是针对以上应用场景进行的封装与使用，避免在项目使用中重复的敲代码以及依赖多个库或者自定义实现等复杂方式。
 
-
+**部分图片以及原理说明，请看我的博客：[recyclerview_helper多功能封装，让你应用更加自如](http://lruheng.com/2017/05/26/recyclerview_helper%E5%A4%9A%E5%8A%9F%E8%83%BD%E5%B0%81%E8%A3%85%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%BA%94%E7%94%A8%E6%9B%B4%E5%8A%A0%E8%87%AA%E5%A6%82/)**
 ## 一、简介
 
 ![](http://upload-images.jianshu.io/upload_images/3985563-f84a7b0f0d300690.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)  
