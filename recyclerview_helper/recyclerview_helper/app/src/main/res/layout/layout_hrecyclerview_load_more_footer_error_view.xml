@@ -5,4 +5,4 @@
     android:layout_height="36dp"
     android:gravity="center"
     android:layout_gravity="center"
-    android:text="NETWORK ERROR, TRY AGAIN" />
+    android:text="网络不佳，请重刷" />

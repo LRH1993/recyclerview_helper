@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.lvr.library.adapter.CommonAdapter;
@@ -21,7 +20,7 @@ import com.lvr.library.recyclerview.OnLoadMoreListener;
 import com.lvr.library.recyclerview.OnRefreshListener;
 import com.lvr.recyclerview_helper.R;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -32,7 +31,7 @@ public class AllActivity extends AppCompatActivity implements OnLoadMoreListener
     private String[] mStrings = {
             "Apple", "Ball", "Camera", "Day", "Egg", "Foo", "Google", "Hello", "Iron", "Japan", "Coke",
             "Dog", "Cat", "Yahoo", "Sony", "Canon", "Fujitsu", "USA", "Nexus", "LINE", "Haskell", "C++",
-            "Java", "Go", "Swift", "Objective-c", "Ruby", "PHP", "Bash", "ksh", "C", "Groovy", "Kotlin"
+             "Go"
     };
     private int[] mImageRes = {R.drawable.image1, R.drawable.image2};
     private HRecyclerView mRecyclerView;
@@ -44,23 +43,33 @@ public class AllActivity extends AppCompatActivity implements OnLoadMoreListener
             if(msg.what==0){
                 //刷新完毕
                 mRecyclerView.setRefreshing(false);
-            }else{
-                //加载更多完毕
-//                mLoadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
+            }else if(count==4){
                 //没有更多数据
                 mLoadMoreFooterView.setStatus(LoadMoreFooterView.Status.THE_END);
+            }else{
+                //加载更多完毕
+                mDatas.add("Alibaba");
+                mDatas.add("Java");
+                mDatas.add("Kotlin");
+                mDatas.add("Swift");
+                mAdapter.notifyItemInserted(mDatas.size()+1);
+                mLoadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
             }
         }
     };
+    private List<String> mDatas;
+    private CommonAdapter<String> mAdapter;
+    private int count =1;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all);
         mRecyclerView = (HRecyclerView) findViewById(R.id.list);
-
-
-        List<String> mDatas = Arrays.asList(mStrings);
-        CommonAdapter<String> mAdapter = new CommonAdapter<String>(this, R.layout.item_common, mDatas) {
+        mDatas = new ArrayList<>();
+        for(int i=0;i<mStrings.length;i++){
+            mDatas.add(mStrings[0]);
+        }
+        mAdapter = new CommonAdapter<String>(this, R.layout.item_common, mDatas) {
             @Override
             public void convert(BaseViewHolder holder, int position) {
                 holder.setText(R.id.tv_content,mDatas.get(position));
@@ -73,10 +82,6 @@ public class AllActivity extends AppCompatActivity implements OnLoadMoreListener
         ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(mAdapter);
         scaleAdapter.setFirstOnly(false);
         scaleAdapter.setDuration(500);
-        View headView = LayoutInflater.from(AllActivity.this).inflate(R.layout.item_head,null,false);
-        View footView = LayoutInflater.from(AllActivity.this).inflate(R.layout.item_foot,null,false);
-        mRecyclerView.addHeaderView(headView);
-        mRecyclerView.addFooterView(footView);
         mRecyclerView.setAdapter(scaleAdapter);
         mAdapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
             @Override
@@ -95,7 +100,12 @@ public class AllActivity extends AppCompatActivity implements OnLoadMoreListener
         mRecyclerView.setOnRefreshListener(this);
         mRecyclerView.setOnLoadMoreListener(this);
         mLoadMoreFooterView = (LoadMoreFooterView) mRecyclerView.getLoadMoreFooterView();
-
+        mRecyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                mRecyclerView.setRefreshing(true);
+            }
+        });
     }
 
     public void showMyDialog(String message){
@@ -116,16 +126,18 @@ public class AllActivity extends AppCompatActivity implements OnLoadMoreListener
     public void onLoadMore() {
         if(mLoadMoreFooterView.canLoadMore()){
             mLoadMoreFooterView.setStatus(LoadMoreFooterView.Status.LOADING);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    SystemClock.sleep(1000);
+                    Message message = Message.obtain();
+                    message.what =count;
+                    count++;
+                    mHandler.sendMessage(message);
+                }
+            }).start();
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SystemClock.sleep(1000);
-                Message message = Message.obtain();
-                message.what =1;
-                mHandler.sendMessage(message);
-            }
-        }).start();
+
     }
 
     @Override

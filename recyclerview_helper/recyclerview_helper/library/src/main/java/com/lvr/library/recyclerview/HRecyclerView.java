@@ -38,7 +38,7 @@ public class HRecyclerView extends RecyclerView {
 
     private static final int STATUS_REFRESHING = 3;
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private int mStatus;
 

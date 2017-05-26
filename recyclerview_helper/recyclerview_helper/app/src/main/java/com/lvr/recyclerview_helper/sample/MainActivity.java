@@ -264,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public int getItemViewType(int position, String s) {
-                if (position == 0) {
+                if (position%3==0&& position>0) {
                     return TYPE_HEAD;
                 } else {
                     return TYPE_COMMON;
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
         MultiItemCommonAdapter<String> mAdapter = new MultiItemCommonAdapter<String>(this, mDatas, support) {
             @Override
             public void convert(BaseViewHolder holder, int position) {
-                if (position == 0) {
+                if (position%3==0&& position>0) {
                     holder.setImageResource(R.id.iv_head,R.drawable.multi_image);
                 } else {
                     holder.setText(R.id.tv_content,mDatas.get(position));
