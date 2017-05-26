@@ -35,8 +35,8 @@ dependencies {
 ```
 #### 2.单/多类型Item使用
 
-![](http://upload-images.jianshu.io/upload_images/3985563-b0a41886571a77da.gif?imageMogr2/auto-orient/strip)    
-**单类型**  
+![](http://upload-images.jianshu.io/upload_images/3985563-b0a41886571a77da.gif?imageMogr2/auto-orient/strip)      
+**单类型**    
 ```
 CommonAdapter<String> mAdapter = new CommonAdapter<String>(this, R.layout.item_common, mDatas) {
             @Override
@@ -50,7 +50,7 @@ CommonAdapter<String> mAdapter = new CommonAdapter<String>(this, R.layout.item_c
 ```
 通过实现CommonAdapter，传入context,布局以及数据，然后实现convert方法，设置view的显示数据就完成了。很简洁方便。
 
-**多类型**
+**多类型**  
 ```
 MultiItemTypeSupport<String> support = new MultiItemTypeSupport<String>() {
             @Override
@@ -90,9 +90,9 @@ MultiItemTypeSupport<String> support = new MultiItemTypeSupport<String>() {
 和单类型的区别就是需要实现MultiItemTypeSupport，在MultiItemCommonAdapter对象中传入实现的该对象，该对象完成两个方法，功能是通过类型判别Item布局以及通过位置和数据判断返回类型。通过这个对象,避免我们在Adapter中进行类别判断的书写。
 
 该部分实现参考了鸿洋大神对RecyclerView的封装。
-#### 3.事件监听使用
-![](http://upload-images.jianshu.io/upload_images/3985563-66bd80ade059df09.gif?imageMogr2/auto-orient/strip)
-事件监听的使用就比较简单了，和正常使用一样。
+#### 3.事件监听使用  
+![](http://upload-images.jianshu.io/upload_images/3985563-66bd80ade059df09.gif?imageMogr2/auto-orient/strip)  
+事件监听的使用就比较简单了，和正常使用一样。  
 ```
 adapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
             @Override
@@ -109,9 +109,9 @@ adapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
             }
         });
 ```
-#### 4.动画使用
-![](http://upload-images.jianshu.io/upload_images/3985563-16e767bc760f5467.gif?imageMogr2/auto-orient/strip)  
-gif录制效果不太明显，实际手机上看着效果还是不错的。  
+#### 4.动画使用  
+![](http://upload-images.jianshu.io/upload_images/3985563-16e767bc760f5467.gif?imageMogr2/auto-orient/strip)      
+gif录制效果不太明显，实际手机上看着效果还是不错的。    
 ```
 mRecyclerView.setItemAnimator(new LandingAnimator());
         ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(adapter);
@@ -180,9 +180,9 @@ recyclerview_helper中已经自定义了各种动画效果，如果有好的实�
 
 ![](http://upload-images.jianshu.io/upload_images/3985563-e5825e68eef51b93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)  
 该部分实现参考了recyclerview-animators这个动画库。  
-#### 5.添加头/尾布局
-![](http://upload-images.jianshu.io/upload_images/3985563-21e7d86af38a8559.gif?imageMogr2/auto-orient/strip)
-自定义头/尾布局，随意添加。
+#### 5.添加头/尾布局  
+![](http://upload-images.jianshu.io/upload_images/3985563-21e7d86af38a8559.gif?imageMogr2/auto-orient/strip)  
+自定义头/尾布局，随意添加。  
 ```
  View headView = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_head,null,false);
         View footView = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_foot,null,false);
@@ -190,9 +190,9 @@ recyclerview_helper中已经自定义了各种动画效果，如果有好的实�
         mRecyclerView.addFooterView(footView);
 ```
 几行代码搞定。
-#### 6.下拉刷新/上拉加载
-![](http://upload-images.jianshu.io/upload_images/3985563-ab69df2b3f4aefb4.gif?imageMogr2/auto-orient/strip)  
-布局设置  
+#### 6.下拉刷新/上拉加载  
+![](http://upload-images.jianshu.io/upload_images/3985563-ab69df2b3f4aefb4.gif?imageMogr2/auto-orient/strip)    
+布局设置    
 ```
 <com.lvr.library.recyclerview.HRecyclerView
         app:loadMoreEnabled="true"
@@ -203,9 +203,9 @@ recyclerview_helper中已经自定义了各种动画效果，如果有好的实�
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 ```
-其中头/尾布局需要自定义View实现。在例子中已经分别实现了一种  
-![](http://upload-images.jianshu.io/upload_images/3985563-e48885ab683e2f07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)  
-如果想实现不同的加载图片以及动画效果，可以对比实现。  
+其中头/尾布局需要自定义View实现。在例子中已经分别实现了一种    
+![](http://upload-images.jianshu.io/upload_images/3985563-e48885ab683e2f07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)    
+如果想实现不同的加载图片以及动画效果，可以对比实现。    
 
 首先设置监听
 ```
