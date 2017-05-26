@@ -35,8 +35,8 @@ dependencies {
 ```
 #### 2.单/多类型Item使用
 
-![](http://upload-images.jianshu.io/upload_images/3985563-b0a41886571a77da.gif?imageMogr2/auto-orient/strip)
-**单类型**
+![](http://upload-images.jianshu.io/upload_images/3985563-b0a41886571a77da.gif?imageMogr2/auto-orient/strip)    
+**单类型**  
 ```
 CommonAdapter<String> mAdapter = new CommonAdapter<String>(this, R.layout.item_common, mDatas) {
             @Override
